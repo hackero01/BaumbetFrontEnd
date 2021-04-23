@@ -36,7 +36,7 @@ export class BaumComponent implements OnInit {
   }
 
   infoMessage(i: number, type: string) {
-    this.messageService.add({ severity: type, summary: type, detail: 'Has found ' + i + ' entries' });
+    this.messageService.add({ severity: type, summary: '', detail: 'Has found ' + i + ' entries' });
   }
   searchValidation( ) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All inputs all mandatory' });
