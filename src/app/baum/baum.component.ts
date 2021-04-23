@@ -22,9 +22,9 @@ export class BaumComponent implements OnInit {
   matches: Fixture[];
   selectedLeague: League;
   choosedDate: Date;
-  constructor(private datePipe: DatePipe, private baumService: BaumService,private messageService: MessageService) {
+  constructor(private datePipe: DatePipe, private baumService: BaumService, private messageService: MessageService) {
     this.leagues = [
-      
+
       { Id: 1, Name: 'Liga 1' },
       { Id: 2, Name: 'Premier League' },
       { Id: 3, Name: 'Bundesliga' },
@@ -35,21 +35,30 @@ export class BaumComponent implements OnInit {
   ngOnInit() {
   }
 
-  addSingle(i:number,type:string) {
-    this.messageService.add({severity:type, summary:type, detail:'Has found '+ i +' entries'});
-  } 
-
+  infoMessage(i: number, type: string) {
+    this.messageService.add({ severity: type, summary: type, detail: 'Has found ' + i + ' entries' });
+  }
+  searchValidation( ) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All inputs all mandatory' });
+  }
   searchFixtures() {
     this.datePipe.transform(this.choosedDate, "yyyy-MM-dd");
-    this.baumService.searchFixtures(this.selectedLeague.Id, this.datePipe.transform(this.choosedDate, "yyyy-MM-dd")).subscribe((res) => {
-      this.matches = res;
-      if (res.length>0){
-        this.addSingle(res.length,'success');
-      }else{
-        this.addSingle(res.length,'error');
-      }
-    });
+    
+    if ((this.selectedLeague != null || undefined) && this.choosedDate != null) {
+
+      this.baumService.searchFixtures(this.selectedLeague.Id, this.datePipe.transform(this.choosedDate, "yyyy-MM-dd")).subscribe((res) => {
+        this.matches = res;
+        if (res.length > 0) {
+          this.infoMessage(res.length, 'success');
+        } else {
+          this.infoMessage(res.length, 'error');
+        }
+      });
+    } else {
+      this.searchValidation();
+    }
+
   }
-   
+
 }
 

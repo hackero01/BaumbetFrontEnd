@@ -3,14 +3,14 @@
         <label class="p-col-fixed" style="width:100px">Select a league:</label>
         <div class="p-col">
             <p-dropdown [options]="leagues" [(ngModel)]="selectedLeague" placeholder="Select a league"
-                optionLabel="Name"></p-dropdown>
+                optionLabel="Name" dataKey="Id"></p-dropdown>
         </div>
     </div>
     <br/>
     <div class="p-field p-grid">
         <label class="p-col-fixed" style="width:100px">Select a date:</label>
         <div class="p-col">
-            <p-calendar inputId="basic" [(ngModel)]="choosedDate" dateFormat="yy-dd-mm" [readonlyInput]="true">
+            <p-calendar inputId="basic" [(ngModel)]="choosedDate" dateFormat="yy-dd-mm" [readonlyInput]="true" >
             </p-calendar>
         </div>
     </div>
