@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaumComponent } from './baum/baum.component';
 
 const routes: Routes = [
-  {path:'getFixtures', component:BaumComponent}
+  {path:'FixtureDemo', component:BaumComponent}
 ];
 
 @NgModule({
